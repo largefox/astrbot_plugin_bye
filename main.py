@@ -6,7 +6,7 @@ from astrbot.api import logger
 from astrbot.core.platform.sources.aiocqhttp.aiocqhttp_message_event import AiocqhttpMessageEvent
 from astrbot.core.star.filter.event_message_type import EventMessageType
 
-@register("astrbot_plugin_bye", "largefox", "群聊氛围不合适或不欢迎机器人的时候，让机器人主动退群，保护机器人身心健康，节省Tokens。", "1.0.0")
+@register("astrbot_plugin_bye", "largefox", "识别不友善以及不欢迎bot的群聊，让bot主动退群，保护bot身心健康，从源头上节省Tokens。", "1.0.0")
 class ByePlugin(Star):
     def __init__(self, context: Context, config: dict):
         super().__init__(context)
@@ -109,7 +109,7 @@ class ByePlugin(Star):
                 curr_dur = self.mute_stats[gid_str]["duration"]
                 
                 future_dur = curr_dur if use_expected else curr_dur + (duration / 3600.0)
-                logger.info(f"机器人在群 {group_id} 被禁言 {duration} 秒，当前累计次数: {curr_count}，当前已锁定时长: {curr_dur:.2f} 小时")
+                logger.info(f"bot在群 {group_id} 被禁言 {duration} 秒，当前累计次数: {curr_count}，当前已锁定时长: {curr_dur:.2f} 小时")
                 
                 should_leave = False
                 leave_reason = ""
@@ -198,7 +198,7 @@ class ByePlugin(Star):
                         logger.error(f"解除禁言后立刻抛错无法退群: {e}")
                 else:
                     if gid_str in self.pending_leaves:
-                        logger.info(f"提前解除禁言成功拯救此时的机器人，撤销原定退群计划: {group_id}")
+                        logger.info(f"提前解除禁言成功拯救此时的bot，撤销原定退群计划: {group_id}")
                         del self.pending_leaves[gid_str]
                         await self.save_pending_leaves()
                     self._update_warning_card(event, group_id, self_id, curr_count, curr_dur)
@@ -333,7 +333,7 @@ class ByePlugin(Star):
                 provider_id = None
         
         prompt = f'''你是一个专门用于意图判定的安全中枢助手。
-请判定以下群聊消息是否明确表现出对机器人（Bot）的厌恶、反感、敌对或驱逐意图。
+请判定以下群聊消息是否明确表现出对bot的厌恶、反感、敌对或驱逐意图。
 注意：只需回答“是”或“否”，不要输出任何其他内容。
 消息内容：{message_str}'''
         
@@ -463,7 +463,7 @@ class ByePlugin(Star):
     # 注册指令的装饰器。指令名为 bye。注册成功后，发送 `/bye` 就会触发这个指令。
     @filter.command("bye")
     async def bye(self, event: AstrMessageEvent):
-        """让机器人主动退群的指令（原生支持别名替换功能）"""
+        """让bot主动退群的指令（原生支持别名替换功能）"""
         try:
             res = await self._execute_manual_leave(event, yield_result=True)
             if res:

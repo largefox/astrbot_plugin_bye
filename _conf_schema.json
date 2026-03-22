@@ -28,7 +28,7 @@
             "enabled": {
                 "description": "🛠️ 退群指令",
                 "type": "bool",
-                "hint": "开启后可通过 /bye 指令（如修改前缀则依照用户设定的前缀）让机器人主动退出当前群聊。关闭则无视该指令。",
+                "hint": "开启后可通过 /bye 指令（如修改前缀则依照用户设定的前缀）让bot主动退出当前群聊。关闭则无视该指令。",
                 "default": true
             },
             "custom_command": {
@@ -42,7 +42,7 @@
     "mute_trigger": {
         "description": "【禁言退群】",
         "type": "object",
-        "hint": "处理机器人遭到群管理禁言操作时的累计惩罚逻辑。",
+        "hint": "处理bot遭到群管理禁言操作时的累计惩罚逻辑。",
         "items": {
             "max_mute_count": {
                 "description": "🛑 禁言次数阈值",
@@ -125,13 +125,13 @@
             "max_hostile_count": {
                 "description": "🤬 敌意发言容忍次数",
                 "type": "int",
-                "hint": "被LLM判定带有辱骂、厌恶、排斥机器人意图的发言累计次数达标则触发退群。",
+                "hint": "被LLM判定带有辱骂、厌恶、排斥bot意图的发言累计次数达标则触发退群。",
                 "slider": {
                     "min": 1,
                     "max": 20,
                     "step": 1
                 },
-                "default": 5
+                "default": 6
             }
         }
     }
