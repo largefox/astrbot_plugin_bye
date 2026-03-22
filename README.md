@@ -1,14 +1,52 @@
-# astrbot-plugin-helloworld
+<div align="center">
 
-AstrBot 插件模板 / A template plugin for AstrBot plugin feature
+# astrbot_plugin_bye
 
-> [!NOTE]
-> This repo is just a template of [AstrBot](https://github.com/AstrBotDevs/AstrBot) Plugin.
-> 
-> [AstrBot](https://github.com/AstrBotDevs/AstrBot) is an agentic assistant for both personal and group conversations. It can be deployed across dozens of mainstream instant messaging platforms, including QQ, Telegram, Feishu, DingTalk, Slack, LINE, Discord, Matrix, etc. In addition, it provides a reliable and extensible conversational AI infrastructure for individuals, developers, and teams. Whether you need a personal AI companion, an intelligent customer support agent, an automation assistant, or an enterprise knowledge base, AstrBot enables you to quickly build AI applications directly within your existing messaging workflows.
+群聊氛围不合适或不欢迎机器人的时候，让机器人主动退群，保护机器人身心健康，节省Tokens。
 
-# Supports
 
-- [AstrBot Repo](https://github.com/AstrBotDevs/AstrBot)
-- [AstrBot Plugin Development Docs (Chinese)](https://docs.astrbot.app/dev/star/plugin-new.html)
-- [AstrBot Plugin Development Docs (English)](https://docs.astrbot.app/en/dev/star/plugin-new.html)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
+[![AstrBot](https://img.shields.io/badge/AstrBot-4.0%2B-orange.svg)](https://github.com/Soulter/AstrBot)
+[![GitHub](https://img.shields.io/badge/作者-largefox-blue)](#)
+
+</div>
+
+
+## 📦 安装方法
+
+在 AstrBot 插件市场搜索 **astrbot_plugin_bye**，点击安装即可生效启用。
+
+---
+
+## 🤝 这是干嘛用的？
+
+当机器人在群里遭遇不友善态度（如群管反复禁言）、遇到明显敌意、排斥甚至辱骂的群聊环境时，插件会自动帮机器人留下遗言并退群，保证群聊环境的清爽，保持机器人身心健康，并节省Tokens。
+
+---
+
+## ⌨️ 命令大全
+
+| 命令 | 干什么用的 |
+|------|-----------|
+| `/bye` | （如前缀设置为其他的，则为 `[前缀]bye`）最原生的默认指令。在群聊发送该指令后，机器人抛出一个告别短语并随后秒退群。 |
+| *自定义文本* | 你可以在控制面板设定如 `你褪裙吧`，不带前缀发群里即可产生等同 `/bye` 的强制效果。 |
+
+
+---
+
+## 📋 配置归类一览表
+
+| 分类配置块                 | 你可以在里面调节什么                                               |
+| ------------------- | ------------------------------------------------------ |
+| **【全局设置】**          | `防御白名单列表`(免死群号录入槽) 与 `全局告别语`设定               |
+| **【禁言退群】**       | `禁言次数总容忍上限` / `禁言时长总容忍上限` / `中途提前解禁后的容错算账方式选择` / `名片预警的倒计时触发线` |
+| **【LLM语义判定退群】**     | `首层激怒关键词列表` / `指定哪一个模型ID来进行判断` / `二层大模型的被骂最高容忍次数`          |
+| **【指令退群】**       | `/bye 功能总闸口开关` / `隐蔽的自定义中文退群指令词` |
+
+---
+
+## 👥 交流与反馈
+
+- 🌟 如果这个插件成功保护了你的机器人的身心健康，请毫不吝啬地在 Github 上点亮你的 Star，让更多人看到！
+- 💡 或者随时向原仓库的作者反馈好玩的脑洞与功能建议。

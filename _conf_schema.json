@@ -1,0 +1,138 @@
+{
+    "general": {
+        "description": "【全局设置】",
+        "type": "object",
+        "hint": "关于插件的基础防护配置。",
+        "items": {
+            "whitelist": {
+                "description": "🛡️ 群聊白名单",
+                "type": "list",
+                "hint": "位于白名单的群聊对本插件绝对免疫，任何自动或指令退群触发无效，且加入白名单后会立刻无条件撤销该群正在倒计时的所有残余退群任务。",
+                "default": [
+                    "1145141919810"
+                ]
+            },
+            "leave_message": {
+                "description": "💬 告别语",
+                "type": "string",
+                "hint": "触发退群前，向群内发送的最后一条消息。",
+                "default": "看来这个群不欢迎我，退了退了"
+            }
+        }
+    },
+    "command_trigger": {
+        "description": "【指令退群】",
+        "type": "object",
+        "hint": "关于指令退群的相关设置。",
+        "items": {
+            "enabled": {
+                "description": "🛠️ 退群指令",
+                "type": "bool",
+                "hint": "开启后可通过 /bye 指令（如修改前缀则依照用户设定的前缀）让机器人主动退出当前群聊。关闭则无视该指令。",
+                "default": true
+            },
+            "custom_command": {
+                "description": "⌨️ 自定义退群关键词",
+                "type": "string",
+                "hint": "自定义触发退群的关键词（如填入“leave”或“你褪裙吧”，注意没有前缀也可触发）。留空则仅保留默认的常规指令bye。",
+                "default": ""
+            }
+        }
+    },
+    "mute_trigger": {
+        "description": "【禁言退群】",
+        "type": "object",
+        "hint": "处理机器人遭到群管理禁言操作时的累计惩罚逻辑。",
+        "items": {
+            "max_mute_count": {
+                "description": "🛑 禁言次数阈值",
+                "type": "int",
+                "hint": "累计被禁言达到该次数后自动退群（0代表不启用）。",
+                "slider": {
+                    "min": 0,
+                    "max": 20,
+                    "step": 1
+                },
+                "default": 3
+            },
+            "max_mute_duration": {
+                "description": "🛑 禁言时长阈值 (小时)",
+                "type": "float",
+                "hint": "【累计】被禁言达到该时长后自动退群（0代表不启用，单位小时），可填写小数。",
+                "default": 48.50
+            },
+            "use_expected_mute_duration_for_leave": {
+                "description": "⏱️ 禁言时长计算方式",
+                "type": "string",
+                "hint": "管理员中途可能会取消禁言，可以选择按照拟禁言时长或者实际禁言时长决定是否退群。",
+                "options": [
+                    "expected",
+                    "actual"
+                ],
+                "labels": [
+                    "按照判罚时间",
+                    "按照实际禁言时间"
+                ],
+                "default": "actual"
+            },
+            "warning_mute_count_left": {
+                "description": "⚠️ 剩余禁言次数提示",
+                "type": "int",
+                "hint": "当剩余允许被禁言的次数达到该值时，自动修改群名片追加警告后缀（填 0 关闭提示）。",
+                "slider": {
+                    "min": 0,
+                    "max": 5,
+                    "step": 1
+                },
+                "default": 1
+            },
+            "warning_mute_duration_left": {
+                "description": "⚠️ 剩余禁言时长提示 (分钟)",
+                "type": "int",
+                "hint": "当剩余允许时长进入倒计时警戒线时，提示群名片后缀（填 0 关闭提示）。",
+                "slider": {
+                    "min": 0,
+                    "max": 60,
+                    "step": 1
+                },
+                "default": 10
+            }
+        }
+    },
+    "llm_trigger": {
+        "description": "【LLM语义判定退群】",
+        "type": "object",
+        "hint": "通过自然语言分析，动态判断敌对意图决定是否退群。",
+        "items": {
+            "hostile_keywords": {
+                "description": "🤬 触发关键词",
+                "type": "list",
+                "hint": "列表留空则关闭LLM判定功能。在此处添加“滚”、“爬”、“死”等短词，命中词汇后发送至大模型判定。",
+                "default": [
+                    "滚",
+                    "爬",
+                    "退群",
+                    "踢"
+                ]
+            },
+            "hostile_llm_provider": {
+                "description": "🧠 调用模型 ID",
+                "type": "string",
+                "hint": "可选指定单独调用做判定的模型（如Qwen3.5-4B），留空则自动应用会话当下的主聊天模型。",
+                "default": "",
+                "_special": "select_provider"
+            },
+            "max_hostile_count": {
+                "description": "🤬 敌意发言容忍次数",
+                "type": "int",
+                "hint": "被LLM判定带有辱骂、厌恶、排斥机器人意图的发言累计次数达标则触发退群。",
+                "slider": {
+                    "min": 1,
+                    "max": 20,
+                    "step": 1
+                },
+                "default": 6
+            }
+        }
+    }
+}
