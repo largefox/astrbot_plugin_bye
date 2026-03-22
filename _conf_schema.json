@@ -75,6 +75,12 @@
                 ],
                 "default": "actual"
             },
+            "revoke_count_on_unmute": {
+                "description": "↩️ 解除禁言后补回计数",
+                "type": "bool",
+                "hint": "开启后，如果群管提前解除禁言，补回此次被禁言的容忍计数。关闭则不补回。",
+                "default": true
+            },
             "warning_mute_count_left": {
                 "description": "⚠️ 剩余禁言次数提示",
                 "type": "int",
@@ -132,6 +138,37 @@
                     "step": 1
                 },
                 "default": 6
+            },
+            "warning_hostile_count_left": {
+                "description": "⚠️ 剩余不友善发言容忍次数提示",
+                "type": "int",
+                "hint": "当剩余容忍次数达到该值时，向群内发送消息提醒（该值及以内均会发送一次）。填 0 则关闭提示。",
+                "slider": {
+                    "min": 0,
+                    "max": 10,
+                    "step": 1
+                },
+                "default": 2
+            },
+            "warning_hostile_message": {
+                "description": "📢 不友善退群提示消息模板",
+                "type": "string",
+                "hint": "触发敌意倒计时提示时向群内发送的警告消息。支持变量：{count} 当前累计次数，{max} 总容忍上限，{left} 剩余次数。",
+                "default": "【提示】当前已检测到{count}次不友善发言，再来{left}次bot即会退群。"
+            },
+            "hostile_prompt": {
+                "description": "敌意判定Prompt",
+                "type": "object",
+                "hint": "LLM 敌意判定使用的提示词模板配置，可自定义分析指令的提示词内容。系统会自动将涉事对话拼接在末尾检测。",
+                "items": {
+                    "prompt_template": {
+                        "description": "敌意判定Prompt",
+                        "type": "text",
+                        "editor_mode": true,
+                        "editor_language": "markdown",
+                        "default": "你是一个专门用于意图判定的安全中枢助手。\n请判定以下目标对话是否明确表现出对bot的厌恶、反感、敌对或驱逐意图。\n注意：严格只回答“是”或“否”，绝对不要输出任何额外的内容标记。"
+                    }
+                }
             }
         }
     }
