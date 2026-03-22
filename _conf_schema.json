@@ -131,7 +131,7 @@
                     "max": 20,
                     "step": 1
                 },
-                "default": 6
+                "default": 5
             }
         }
     }

@@ -2,7 +2,7 @@
 
 # astrbot_plugin_bye
 
-群聊氛围不合适或不欢迎机器人的时候，让机器人主动退群，保护机器人身心健康，节省Tokens。
+群聊氛围不合适或不欢迎机器人的时候，让机器人主动退群，保护机器人身心健康，节省Tokens。 
 
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
